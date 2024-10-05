@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parish Inspections</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Parish Inspection Portal</a>
+        <div class="ml-auto">
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'create_parish' %}">Add Parish</a>
+                <!-- Logout form -->
+                <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
+                <a class="btn btn-secondary" href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Available Parishes</h1>
+        <div class="list-group">
+            {% for parish in parishes %}
+                <a href="{% url 'parish_detail' parish.id %}" class="list-group-item list-group-item-action d-flex align-items-center">
+
+                    <img class="rounded-circle me-5" src="{{ parish.image.url }}"  style="width: 50px; height: 50px;">
+                    <div>
+                        <h4 class="mb-1 ml-3 ">{{ parish.name }}</h4>
+                        <p class="mb-0 ml-3">{{ parish.description }}</p>
+                    </div>
+                </a>
+
+            {% empty %}
+                <p>No parishes available.</p>
+            {% endfor %}
+        </div>
+
+        <div class="mt-4">
+            {% if is_paginated %}
+                <nav>
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        {% for page_num in paginator.page_range %}
+                            <li class="page-item {% if page_num == page_obj.number %}active{% endif %}">
+                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
+

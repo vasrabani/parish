@@ -1,0 +1,24 @@
+<h3>Inspection for {{ inspection.parish.name }}</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Response</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inspection_question in inspection_questions %}
+        <tr>
+            <td>{{ inspection_question.question.question_text }}</td>
+            <td>{{ inspection_question.answer }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>General Comment</h4>
+<p>{{ comment.comment_text }}</p>
+
+
+
