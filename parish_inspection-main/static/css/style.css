@@ -1,0 +1,35 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+}
+
+.navbar {
+    background-color: #5f27cd;
+    color: #fff;
+}
+
+.navbar a {
+    color: #fff !important;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.list-group-item {
+    background-color: #f7f7f7;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #2e86de;
+    border-color: #2e86de;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #5f27cd;
+    border-color: #5f27cd;
+}

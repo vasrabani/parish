@@ -1,0 +1,66 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Home - Parish Inspections{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Available Parishes</h1>
+        <h5>Total Parishes: {{ parishes.count }}</h5> <!-- Display total number of parishes -->
+    </div>
+
+    <div class="list-group">
+        {% for parish in parishes %}
+            <div class="list-group-item d-flex align-items-center">
+                <img class="rounded-circle mr-3" src="{{ parish.image.url }}" alt="Parish Image" style="width: 50px; height: 50px;">
+                <div class="flex-grow-1">
+                    <h4>{{ parish.name }}</h4>
+                    <p>{{ parish.description }}</p>
+                    <p><strong>Location:</strong> {{ parish.location }}</p>
+                    <p><strong>Contact:</strong> {{ parish.contact }}</p>
+                    <p><strong>Phone Number:</strong> {{ parish.phone_number }}</p>
+                </div>
+                <div class="ml-auto">
+                    <a href="{% url 'parish_detail' parish.id %}" class="btn btn-primary ml-auto" style="position: absolute; right: 20px; top: 60px; width: 100px;">View</a>
+                    <div class="mt-3">
+                        <strong>Inspections:</strong>
+                        {% with parish.inspections.all|dictsortreversed:"updated_at" as sorted_inspections %}
+                            {% with sorted_inspections|slice:":5" as recent_inspections %}
+                                {% for inspection in recent_inspections %}
+                                    <a href="{% url 'inspection_detail' parish.id inspection.id %}">
+                                        {{ forloop.counter }} <!-- Display numbered shortcuts -->
+                                    </a>
+                                    {% if not forloop.last %}|{% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No parishes available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4">
+        {% if is_paginated %}
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    {% for page_num in paginator.page_range %}
+                        <li class="page-item {% if page_num == page_obj.number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

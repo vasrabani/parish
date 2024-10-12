@@ -1,0 +1,56 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Create Parish{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Create New Parish</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Upload Image Field -->
+            <div class="form-group">
+                <label for="image">Upload Profile Picture</label>
+                <input type="file" name="image" class="form-control" id="image">
+                <small class="form-text text-muted">Leave this blank to use the default logo.</small>
+            </div>
+
+            <!-- Parish Name Field -->
+            <div class="form-group">
+                <label for="name">Parish Name</label>
+                {{ form.name }}
+            </div>
+
+            <!-- Parish Description Field -->
+            <div class="form-group">
+                <label for="description">Parish Description</label>
+                {{ form.description }}
+            </div>
+
+            <!-- Parish Location Field -->
+            <div class="form-group">
+                <label for="location">Parish Location</label>
+                {{ form.location }}
+            </div>
+
+            <!-- Parish Contact Field -->
+            <div class="form-group">
+                <label for="contact">Parish Contact</label>
+                {{ form.contact }}
+            </div>
+
+            <!-- Parish Phone Number Field -->
+            <div class="form-group">
+                <label for="phone_number">Parish Phone Number</label>
+                {{ form.phone_number }}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Create Parish</button>
+        </form>
+
+        <!-- Back to Home Button -->
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+{% endblock %}
+

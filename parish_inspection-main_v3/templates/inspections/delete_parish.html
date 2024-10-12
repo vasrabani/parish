@@ -1,0 +1,8 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<h2>Deletion Confirmed</h2>
+<p>The following parish "{{ object.parish }}" has been deleted.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Go back</button>
+</form>

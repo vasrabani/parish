@@ -1,0 +1,145 @@
+Step 1 - Download code
+Step 2 - go to Command prompt and go to root folder 
+	- parish_inspection-main
+
+Step 3 - Create virtual environment using the command:
+	>
+	python -m venv env
+
+	This will create the folder /env
+
+Step 4 - Activate the server, running the command:
+
+	>
+	env/Scripts/activate
+
+	The path will now have the prefix (env) so you have the virtual dev env
+
+Step 5 - Install Django - using the following command
+	>
+	pip install django
+
+Step 6 - Run the following command
+
+	>
+	pip install -r requirements.txt
+
+	Note: This is the step that imports all the library modules and all dependencies
+	
+	pip install django-crispy-forms
+	pip install crispy-bootstrap5
+	pip install pillow
+
+
+Step 6 - move to manage.py location
+
+	>
+	cd parish_inspection
+
+	Note your path should be
+
+	.../parish/parish_inspection-main/parish_inspection
+	
+	There will be a file manage.py	
+
+	.../parish/parish_inspection-main/parish_inspection/manage.py
+
+	This is the location you need to be
+
+Step 7
+
+	Run Migrate : using command to create all user/system tables
+	>
+	python manage.py migrate
+
+Step 8
+	Create superuser using command:
+	>
+	python manage.py createsuperuser
+
+	Note: add your admin and password
+
+Step 9 - Seed the Data run the Shell command
+
+	>
+	python manage.py shell
+
+	Note: The shell command allows you to use a space to do some data operations
+
+Step 10 SHELL - Using the >>> prmompt type in the command then press <Enter>
+
+	>
+	from inspections.models import Question
+
+Step 11 SHELL - Paste the full block of code and then press <enter>
+
+default_questions = [
+    "Signage: Is signage present, stable, legible and with no protruding bolts?",
+    "General Surfaces: Are they free from debris, erosion, litter, weeds, slippery algae, etc.?",
+    "General Surfaces: Are any ground grids present and secure?",
+    "Litter Bins: Are they secure with liners present?",
+    "Litter Bins: Are they empty or not in need of emptying?",
+    "Seating – Various: Are the seats secured to the ground, stable, clean, undamaged, and showing no obvious signs of timber decay or corrosion/decay?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Are the supports and cross bar secure, undamaged, and free from any obvious signs of corrosion?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Are all caps fitted?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Is the unit stable?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Are the swing seats free from damage and secure?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Are the chains and shackles showing no signs of excessive wear and working freely?",
+    "Swing – Mixed – 2 Bay 4 Seat- Wicksteed: Is the surfacing undamaged and in a good condition without erosion/puddling?",
+    "Slide – Embankment: Is the starting section secure, stable and free from damage?",
+    "Slide – Embankment: Is the slide-chute in a good condition, clean and free from any foreign objects and with no sharp edges?",
+    "Slide – Embankment: Is the surfacing undamaged and in a good condition?",
+    "Cableway: Are all the supports, barriers secure and undamaged with no signs of obvious corrosion/decay present?",
+    "Cableway: Is the unit stable?",
+    "Cableway: Are all component parts present including caps?",
+    "Cableway: Are the cable, seat, and suspension chain present, secure and free from damage?",
+    "Cableway: Does the traveller run smoothly with no undue noise?",
+    "Cableway: Are the take-off and landing areas undamaged?",
+    "Cableway: Is the surfacing undamaged and free from trips?",
+    "Agility Tunnel Mound -Large: Are the tunnel ends free from damage?",
+    "Agility Tunnel Mound -Large: Is the tunnel clean and undamaged?",
+    "Agility Tunnel Mound -Large: Are the palisade logs, steps, ladder and barriers in a good stable condition with no obvious signs of decay?",
+    "Agility Tunnel Mound -Large: Is the surfacing in good order?",
+    "Natural Play – Logs: Are the logs secure, free from damage and any obvious signs of decay?",
+    "Natural Play – Logs: Is the unit free from slippery algae?",
+    "Natural Play – Logs: Is the surfacing undamaged and in a good condition with no erosion and puddling?",
+    "Climber - Logs: Are all supports stable, secure and free from damage and any obvious signs of decay?",
+    "Climber - Logs: Are all component parts present and secure including caps and holds?",
+    "Climber - Logs: Is the unit stable and free from slippery algae?",
+    "Climber - Logs: Are the climbing holds present, secure and non-rotating?",
+    "Climber - Logs: Is the surfacing undamaged and free from trips?"
+]
+
+Step 12 SHELL - Import the Step 11 command by pasting in the command:
+
+	for question_text in default_questions:
+    Question.objects.create(question_text=question_text, is_default=True)
+
+	Note: ******** Then Press <Enter> twice *********
+
+Step 13
+
+	Exit the shell, by typing 
+
+	Exit()
+
+
+STEP 14 - Run the server
+
+	>
+	python manage.py runserver
+
+	Note: this will show the message
+
+	System check identified no issues (0 silenced).
+	October 12, 2024 - 08:21:07
+	Django version 5.1.2, using settings 'parish_inspection.settings'
+	Starting development server at http://127.0.0.1:8000/
+	Quit the server with CTRL-BREAK.
+
+Step 15 - copy the host http://127.0.0.1:8000/ in to your browser to view the site
+
+Step 16 Login as Admin
+Step 17 Add Parish
+Step 18 View and Create Inspection
+
