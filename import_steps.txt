@@ -1,8 +1,8 @@
 ***** You need to place your repository in a folder called "parish" *****
 
-Step 1 - Download code "parish_inspection-main"
+Step 1 - Download code "parish-main"
 Step 2 - go to Command prompt and go to root folder 
-	- parish
+	- parish-main
 Step 3 - Create virtual environment using the command:
 	>
 	python -m venv env
