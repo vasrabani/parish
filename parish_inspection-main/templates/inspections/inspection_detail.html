@@ -1,0 +1,59 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Inspection for {{ inspection.parish.name }}{% endblock %}
+
+{% block content %}
+    <div class="card parish-card parish-details-card p-3">
+        
+        <h3>Inspection for {{ inspection.parish.name }}
+            <a href="" class="btn btn-primary ml-1" title="Edit"><i data-feather="edit"></i>Edit</a></h3>
+        <table class="table table-bordered inspections-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inspection_question in inspection_questions %}
+                <tr>
+                    <td>{{ inspection_question.question.question_text }}</td>
+                    <td class="text-center">
+                        {% if inspection_question.answer == "yes" %}
+                        <i data-feather="check-circle"></i>
+                        {% elif inspection_question.answer == "no" %}
+                        <i data-feather="x-circle"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if inspection_questions.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ inspection_questions.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ inspection_questions.number }} of {{ inspection_questions.paginator.num_pages }}.
+                </span>
+        
+                {% if inspection_questions.has_next %}
+                    <a href="?page={{ inspection_questions.next_page_number }}">next</a>
+                    <a href="?page={{ inspection_questions.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <h4>General Comment</h4>
+        <p>{{ comment.comment_text }}</p>
+    </div>
+    
+
+{% endblock %}
+
+
+
+
+

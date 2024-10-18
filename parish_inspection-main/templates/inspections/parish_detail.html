@@ -1,0 +1,62 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}{{ parish.name }}{% endblock %}
+
+{% block content %}
+    <div class="card parish-card p-3">
+        <a href="{% url 'home' %}" class="btn btn-secondary back-btn"> <i data-feather="arrow-left-circle"></i>Back</a>
+        <div class="row">
+            <div class="col-sm-3">
+                <figure><img  src="{{ parish.image.url }}" alt="parish-image"></figure>
+            </div>
+            <div class="col-sm-9">
+                
+                <h4 class="">Parish: {{ parish.name }}</h4>
+                <p class="">Number of inspections: {{ num_inspections }}</p>
+                {% if request.user.is_authenticated and parish.created_by == request.user %}
+                    <a href="{% url 'create_inspection' parish.id %}" class="btn btn-primary mb-2"><i data-feather="plus-circle"></i>Create Inspection</a>
+                    <a href="{% url 'delete_parish' parish.id %}" class="btn btn-danger mb-2"> <i data-feather="trash-2"></i>Delete Parish</a>
+                {% endif %}
+                <table class="table table-bordered text-center mt-2">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Inspection</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inspection in inspections %}
+                        <tr>
+                            <td><span>{{ parish.created_by }}</span></td>
+                            <td><a href="{% url 'inspection_detail' parish.id inspection.id %}" class="text-inspection"># {{ forloop.revcounter }}</a></td> <!-- Use Django's built-in forloop.counter to numerate -->
+                            <td>{{ inspection.updated_at }}</td>
+                            <td>
+                                <!-- View Button with Eye Icon -->
+                                <a href="{% url 'inspection_detail' parish.id inspection.id %}" class="btn btn-primary" title="View">
+                                    <i data-feather="eye"></i>View
+                                </a>
+                                 <!-- Edit Button with Pencil Icon -->
+                                {% if is_creator %}
+                                <a href="{% url 'edit_inspection' parish.id inspection.id %}" class="btn btn-secondary ml-1" title="Edit">
+                                    <i data-feather="edit"></i>
+                                </a>
+                                <!-- Delete Button with Trash Bin Icon -->
+                                <a href="{% url 'delete_inspection' parish.id inspection.id %}" class="btn btn-secondary ml-1" title="Delete" onclick="return confirm('Are you sure you want to delete this inspection?');">
+                                    <i data-feather="delete"></i>
+                                </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+</div>
+{% endblock %}
+
+
+

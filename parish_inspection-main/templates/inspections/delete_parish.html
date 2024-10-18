@@ -1,0 +1,19 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Deletion Confirmed{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <div class="card parish-delete-card parish-card p-3 text-center">
+                <h2>Deletion Confirmed</h2>
+                <p class="text-danger">The following parish "{{ object.parish }}" has been deleted.</p>
+        
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary"><i data-feather="arrow-left-circle"></i>Go back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Create Parish{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card parish-card p-3">
+            
+            <h2>Create New Parish</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <!-- Parish Name Field -->
+                    <div class="col-sm-8">
+                        <label for="name">Parish Name</label>
+                        {{ form.name }}
+                    </div>
+                    <!-- Upload Image Field -->
+                    <div class="col-sm-4">
+                        <label for="image">Profile Picture <small>(Optional)</small></label>
+                        
+                        <input type="file" name="image" class="form-control mb-2" id="image">
+                        
+                    </div>
+                </div>
+
+                
+
+        
+                <div class="row">
+                    <!-- Parish Location Field -->
+                    <div class="col-sm-4">
+                        <label for="location">Parish Location</label>
+                        {{ form.location }}
+                    </div>
+
+                    <!-- Parish Contact Field -->
+                    <div class="col-sm-4">
+                        <label for="contact">Parish Contact</label>
+                        {{ form.contact }}
+                    </div>
+
+                    <!-- Parish Phone Number Field -->
+                    <div class="col-sm-4">
+                        <label for="phone_number">Parish Phone Number</label>
+                        {{ form.phone_number }}
+                    </div>
+                </div>
+                <!-- Parish Description Field -->
+                <div class="form-group">
+                    <label for="description">Parish Description</label>
+                    {{ form.description }}
+                </div>
+
+               
+                <div class="row">
+                    <div class="col-sm-6">
+                         <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary"><i data-feather="save"></i>Save Parish</button>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                         <!-- Back to Home Button -->
+                        <a href="{% url 'home' %}" class="btn btn-secondary"> <i data-feather="arrow-left-circle"></i>Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+       
+    </div>
+{% endblock %}
+

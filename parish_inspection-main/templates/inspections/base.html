@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Parish Inspections{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Link to your custom styles -->
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
+        <div class="brand clearfix">
+            <a class="navbar-brand text-white" href="/">Parish Inspection Portal</a>
+            <a href="{% url 'home' %}" class="text-white">Home</a>
+        </div>
+        <div class="ml-auto">
+            {% if user.is_authenticated %}
+                <a class="text-white clearfix" href="{% url 'create_parish' %}"><i data-feather="plus-circle"></i>Add Parish</a>
+                <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="text-white clearfix"><i data-feather="log-out"></i> Logout</button>
+                </form>
+            {% else %}
+                <a class="text-white" href="{% url 'register' %}"><i data-feather="user-plus"></i>Register</a>
+                <a class="text-white" href="{% url 'login' %}"><i data-feather="lock"></i>Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 main-container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <p>&copy; 2024 Parish Inspection Portal</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/feather.js' %}"></script>
+    <script>
+        feather.replace();
+      </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

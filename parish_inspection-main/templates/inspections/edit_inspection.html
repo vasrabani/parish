@@ -1,0 +1,57 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Edit Inspection for {{ object.parish }}{% endblock %}
+
+{% block content %}
+    <h3>Edit Inspection for {{ object.parish }}</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Questions</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                    <th>Other</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for field in form %}
+                    {% if field.label != "General Comment" %}
+                    <tr>
+                        <td>{{ field.label }}</td>
+                        <td><input type="radio" name="{{ field.name }}" value="yes" {% if field.value == "yes" %}checked{% endif %}></td>
+                        <td><input type="radio" name="{{ field.name }}" value="no" {% if field.value == "no" %}checked{% endif %}></td>
+                        <td><input type="radio" name="{{ field.name }}" value="other" {% if field.value == "other" %}checked{% endif %}></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                    <td colspan="4">
+                        {{ form.comment_text.label_tag }}<br/>
+                        {{ form.comment_text }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if inspection_questions.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ inspection_questions.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ inspection_questions.number }} of {{ inspection_questions.paginator.num_pages }}.
+                </span>
+        
+                {% if inspection_questions.has_next %}
+                    <a href="?page={{ inspection_questions.next_page_number }}">next</a>
+                    <a href="?page={{ inspection_questions.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Login{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Link to your custom styles -->
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="login-page">
+    {% block content %}
+    
+    <section id="login-wrapper">
+        <form method="POST" class="login-form p-4">
+            {% csrf_token %}
+                <h4 class="text-center mb-4"><i data-feather="lock"></i> Login here</h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="id_username">Username:</label>
+                        <p>{{ form.username }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="id_password">Password:</label>
+                     <p>{{ form.password }}</p>
+                    </div>
+                </div>
+            
+                <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                <p class="pt-2">Don't have an account? <a href="{% url 'register' %}" class="text-dark">Register here</a></p>
+           
+        </form>
+    </section>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/feather.js' %}"></script>
+    <script>
+        feather.replace();
+      </script>
+</body>
+</html>
+

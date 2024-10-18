@@ -1,0 +1,173 @@
+body {
+    font-family: "Readex Pro" !important;
+    background-color: #f4f4f4;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: 600;
+}
+/*----Styles by Sohail---*/
+:root {
+    --primary-color: #a67b5b; /* Example: dark */
+    --secondary-color: #464646; /* Example: light */
+}
+.top-bar{
+    background-color: var(--primary-color) !important;
+}
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary{
+    background-color: var(--primary-color);
+    border:1px solid var(--primary-color)
+}
+.btn-primary:hover{
+    background-color: var(--primary-color);
+    opacity: 0.9;
+    border:1px solid var(--primary-color);
+    box-shadow: 0 0 10px #767676;
+}
+.btn-secondary{
+    background-color: var(--secondary-color);
+    border:1px solid var(--secondary-color)
+}
+.btn-secondary:hover{
+    box-shadow: 0 0 10px #767676;
+}
+.main-container{
+    min-height: 100vh;
+}
+h3 small{
+    font-size: 12px;
+}
+.card.parish-card,
+.card.inspection-card{
+    background-color: #fcfcfc;
+    position: relative;
+}
+
+.card figure{
+    width: 100%;
+    text-align: center;
+    margin:0 auto;
+}
+.card figure img{
+    display: inline-block;
+    width: 100%;
+}
+
+.card.parish-card{
+    min-height: 250px;
+}
+.card.parish-card.parish-delete-card,
+.card.parish-card.parish-details-card{
+    min-height: auto !important;
+}
+.card.parish-card .card-text a,
+.card.parish-card .card-title a,
+.text-inspection{
+    color: var(--primary-color);
+}
+.card.parish-card .card-title a:hover{
+    text-decoration: none;
+}
+.back-btn{
+    position: absolute;
+    right: 25px;
+    top:25px;
+    z-index: 10;
+}
+.navbar svg,
+.card svg{
+   width: 18px;
+   height: 18px;
+   margin: 0 5px 0 0;
+}
+.navbar button.text-white,
+.navbar .text-white{
+    font-size: 14px;
+    border: none;
+    background: none !important;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+.navbar button.text-white:active,
+.navbar button.text-white:focus{
+    border: none;
+    background: none !important;
+    padding: 0;
+    cursor: pointer;
+}
+.navbar .brand .text-white{
+    margin:0 !important;
+    float: left;
+}
+.navbar .text-white svg{
+    float: left;
+}
+.navbar .text-white:after{
+    content:'|';
+    display: inline-block;
+    margin:0 5px;
+}
+.navbar .text-white:last-child:after{
+    display: none;
+}
+.card span:after{
+    content: '|';
+    display: inline-block;
+    padding:0 10px;
+}
+.login-page{
+    min-height: 100vh;
+	overflow: hidden;
+}
+#login-wrapper{
+	position: relative;
+	display: flex;
+	justify-content: center;
+  	align-items: center;
+  	position: relative;
+  	vertical-align: middle;
+  	height: 100vh;
+	width: 100vw;
+}
+.login-form{
+	display:inline-block;
+	width: 400px;
+	padding: 15px;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 5px;
+    border: 1px solid #e7e7e7;
+}
+.login-form input{
+	border-radius:0;
+	height: 46px;
+	box-shadow: none !important;
+	background:none;
+	border-radius: 5px;
+	border: 1px solid #d7d7d7;
+    width: 100%;
+}
+.login-form .btn-primary{
+	padding: 15px 30px;
+    background-color: var(--primary-color);
+	border:none;
+	width: 100%;
+	font-size: 16px;
+	border-radius: 5px;
+}
+.btn-danger:hover,
+.login-form .btn:hover{
+	box-shadow: 0 0 10px #767676;
+}
+
+/* Apply color to even rows */
+.inspections-table tr:nth-child(even) {
+    background-color: #e7e7e7; /* light grey */
+  }
+  
+  /* Apply color to odd rows */
+  .inspections-table tr:nth-child(odd) {
+    background-color: #f7f7f7; /* white */
+  }

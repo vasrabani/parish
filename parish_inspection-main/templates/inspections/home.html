@@ -1,0 +1,92 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Home - Parish Inspections{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-title text-center mb-4">Parish Inspection Portal (PIP)</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="mb-1">Available Parishes</h3>
+            <small class="text-muted">Please add the establishment for review</small>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="text-right">Total Parishes: {{ parishes.count }}</h5> <!-- Display total number of parishes -->
+        </div>
+    </div>
+    <hr class="mt-1">
+    <div class="row">
+        {% for parish in parishes %}
+        <div class="col-sm-6">
+            <div class="card parish-card p-3 mb-3">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <figure>
+                            <a href="{% url 'home' %}" class="text-white">
+                                <img class="card-img-top" src="{{ parish.image.url }}" alt="Parish Image">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="card-body p-0">
+                            <h5 class="card-title"><a href="{% url 'parish_detail' parish.id %}">{{ parish.name }}</a></h5>
+                            <hr>
+                            <p class="card-text">{{ parish.description }}</p>
+                            <p> <a href="{% url 'parish_detail' parish.id %}" class="btn btn-primary col pt-2 pb-2"><i data-feather="eye"></i>View Parish</a></p>
+                        </div>
+                    </div>
+                </div>
+                    
+                <p class="card-text mt-3">
+                    <span><i data-feather="map-pin"></i>{{ parish.location }}</span> 
+                    <span><i data-feather="user"></i>{{ parish.contact }}</span>
+                    <span><i data-feather="phone"></i>{{ parish.phone_number }}</span>
+                    
+                
+                {% with parish.inspections.all|dictsortreversed:"updated_at" as sorted_inspections %}
+                    {% with sorted_inspections|slice:":5" as recent_inspections %}
+                        {% for inspection in recent_inspections %}
+                            <strong><i data-feather="check-square"></i>
+                            <a href="{% url 'inspection_detail' parish.id inspection.id %}">
+                                {{ forloop.counter }} <!-- Display numbered shortcuts -->
+                            </a>
+                            {% if not forloop.last %}|{% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                {% endwith %}
+                </strong>
+               
+                </p>
+            </div>
+        </div>
+        {% empty %}
+            <p>No parishes available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4">
+        {% if is_paginated %}
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    {% for page_num in paginator.page_range %}
+                        <li class="page-item {% if page_num == page_obj.number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

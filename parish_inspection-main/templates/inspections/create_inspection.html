@@ -1,0 +1,17 @@
+{% extends 'inspections/base.html' %}
+
+{% block title %}Create Inspection{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Create Inspection for Parish: {{ parish.name }}</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card inspection-card p-3">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit Inspection</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
